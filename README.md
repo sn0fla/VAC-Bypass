@@ -4,7 +4,7 @@ External memory access library for Counter-Strike 2 that avoids the detection
 vectors VAC uses against traditional external cheats.
 
 > ⚠️ **Educational purposes only.** Using this against live CS2 servers will
-> result in a permanent VAC ban. Don't.
+> result in a unbanned account lol.
 
 ---
 
