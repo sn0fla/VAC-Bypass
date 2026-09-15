@@ -161,32 +161,10 @@ process**.
 
 | Limitation | Why |
 |------------|-----|
-| No kernel-mode driver | Ring-3 only. VAC kernel components can still inspect ring-0 state. |
-| No DMA hardware | PCIe DMA cards bypass OS entirely; this library does not. |
 | No manual mapping | The cheat `.exe` itself is a normal process, not injected. |
 | No VAC module unhooking | If VAC already hooked `ntdll` before `Init()`, indirect syscalls still work, but the *cheat’s own process* is still visible. |
 | No protection against behavioral analysis | VAC’s server-side (VACnet) analyzes gameplay patterns regardless of memory access. |
 | No protection against VAC Live | CS2’s live detection can flag suspicious mid-match behavior independent of memory technique. |
-
----
-
-## Detection Status (Community Reports)
-
-As of CS2 (2023–2025):
-
-- **Handle hijacking** is detected by VAC’s handle scanner but **does not
-  result in a ban** on its own. VAC sees the duplicated handle, resolves the
-  owning process, but does not act on it[reference:10].
-- **Indirect syscalls** bypass user-mode `ntdll` hooks. VAC has no known
-  user-mode counter for indirect syscall execution that stays within `ntdll`’s
-  address space.
-- **PEB walking** is not detected by VAC’s module scanner because no
-  `EnumProcessModules` call is made.
-- **String obfuscation** defeats static signature scanning of the cheat binary.
-
-The combination — hijack + indirect syscalls + PEB walk — removes the three
-most common detection vectors for external cheats: handle creation, API call
-interception, and module enumeration.
 
 ---
 
